@@ -1,11 +1,17 @@
-##Libraries:
-SQLite
+
 
 <h2 align="center">
 
 VİDEO OF THE APP
 
 </h2>
+
+<h3 align="left">
+
+LİBRARİES:
+-SQLite
+
+</h3>
 
 
 
