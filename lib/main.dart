@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:dictionary_app/Detail.dart';
 import 'package:dictionary_app/Kelimeler.dart';
+import 'package:dictionary_app/kelimelerdao.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,26 +34,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    kelimegoster();
+  }
   bool aramayapiliyormu = false;
   String aramakelimesi = "";
 
-
-
-  Future<List<Kelimeler>> tumkelimeler() async {
-    var kelimelistesi = <Kelimeler>[];
-
-    var k1 = Kelimeler(1, "Dog", "Köpek");
-    var k2 = Kelimeler(2, "Eraser", "Silgi");
-    var k3 = Kelimeler(3, "Finger", "Parmak");
-
-    kelimelistesi.add(k1);
-    kelimelistesi.add(k2);
-    kelimelistesi.add(k3);
-
+  Future<List<Kelimeler>> kelimegoster() async {
+    var kelimelistesi = await kelimelerdao().veritabanigoster();
     return kelimelistesi;
-
   }
+
+  Future<List<Kelimeler>> kelimearama() async {
+    var kelimelistesi = await kelimelerdao().veritabaniarama(aramakelimesi);
+    return kelimelistesi;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
     var ekranbilgisi = MediaQuery.of(context);
     final ekranyukseklik = ekranbilgisi.size.height;
     final ekrangenislik = ekranbilgisi.size.width;
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -95,7 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ),
 
-      body: FutureBuilder<List<Kelimeler>>(future: tumkelimeler(),builder: (context,snapshot){
+
+      body: FutureBuilder<List<Kelimeler>>(future: aramayapiliyormu ? kelimearama() :kelimegoster(),builder: (context,snapshot){
         if (snapshot.hasData){
           var kelimelistesi = snapshot.data;
           return ListView.builder(
@@ -106,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(kelime : kelime)));
                 },
-                child: SizedBox(height: ekrangenislik/7,
+                child: SizedBox(height: ekrangenislik/5,
                   child: Card(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
