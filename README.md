@@ -1,16 +1,14 @@
-# dictionary_app
+##Libraries:
+SQLite
 
-A new Flutter project.
+<h2 align="center">
 
-## Getting Started
+VİDEO OF THE APP
 
-This project is a starting point for a Flutter application.
+</h2>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Screen_recording_20240610_010351.webm](https://github.com/MuhammedAliYakisik/Dictionary-App/assets/129868370/0b692b3c-5398-4f9c-b2e6-7e3dd783ddf6)
+
+
